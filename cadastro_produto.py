@@ -51,6 +51,7 @@ def deletar(conexao):
 
 
 
+
 def menu_produto(opcao):
     print("|--------------------------------|")
     print("|       Menu -> Produto          |")

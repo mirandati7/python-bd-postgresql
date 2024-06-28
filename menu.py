@@ -1,7 +1,24 @@
 from cadastro_categoria import menu_categoria
 from cadastro_produto import menu_produto
+from conexao import conecta_db
 
-if __name__ == "__main__":
+
+def login(conexao) -> None:
+   login =  input("Digite o login:")
+   senha =  input("Digite a senha:")
+
+   cursor = conexao.cursor()
+   cursor.execute(" select id,login,senha from usuario " +
+                  " where login = %s and senha = %s",(login,senha) )
+   registro = cursor.fetchone()
+
+   if registro is None:
+       print("Usuario e senhas invalidos")
+   else:
+        menu_principal()
+
+
+def menu_principal():
     print("|--------------------------------|")
     print("|       Menu -> Programa         |")
     print("|--------------------------------|")
@@ -27,3 +44,9 @@ if __name__ == "__main__":
             break
         else:
             print("Opção invalida, tente novamente")
+
+
+
+if __name__ == "__main__":
+    conexao = conecta_db()
+    login(conexao)
