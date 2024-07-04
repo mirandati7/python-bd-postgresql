@@ -1,18 +1,11 @@
 from conexao import conecta_db
 
-# DML = Linguagem de manipulação de Dados
-#CRUD => Create, Read, Update , Delete
-#        INSERT, SELECT , UPDATE, DELETE 
-
-
-# DDL = Linguagem de Criação de tabelas
-#  Create table 
-#  DROP table
-#  Alter table 
 
 def consultar(conexao):
     cursor = conexao.cursor()
-    cursor.execute("select id,nome from categoria")
+    # Execução do Select no banco de dados
+    cursor.execute("select id,nome from cliente")
+    # Recuperar os registros
     registros = cursor.fetchall()
     print("|-----------------------------------|")
     for registro in registros:
@@ -21,16 +14,16 @@ def consultar(conexao):
 
 def inserir(conexao):
     cursor = conexao.cursor()
-    nome_categoria = input('Digite o nome da categoria: ') 
-    sql_insert = "insert into categoria (nome) values ('"+ nome_categoria +  "')"
+    nome_cliente = input('Digite o nome do cliente: ') 
+    sql_insert = "insert into cliente (nome) values ('"+ nome_cliente +  "')"
     cursor.execute(sql_insert)
     conexao.commit()
         
 def alterar(conexao):
     cursor = conexao.cursor()
     id = input("Digite o ID: ")
-    nome_categoria = input('Digite o nome da categoria: ')
-    sql_update = "update categoria set nome ='" + nome_categoria + "' where id = " + id
+    nome_cliente = input('Digite o nome do Cliente: ')
+    sql_update = "update cliente set nome ='" + nome_cliente + "' where id = " + id
     cursor.execute(sql_update)
     conexao.commit()
 
@@ -38,18 +31,18 @@ def alterar(conexao):
 def deletar(conexao):
     cursor = conexao.cursor()
     id = input("Digite o ID: ")
-    sql_delete = "delete from  categoria where id = " + id
+    sql_delete = "delete from  cliente where id = " + id
     cursor.execute(sql_delete)
     conexao.commit()
 
-def menu_categoria(opcao):
+def menu_cliente(opcao):
     print("|--------------------------------|")
-    print("|       Menu -> Categoria        |")
+    print("|       Menu -> Cliente        |")
     print("|--------------------------------|")
-    print("|     1 - Consultar Categoria    |")
-    print("|     2 - Inserir Categoria      |")
-    print("|     3 - Alterar Categoria      |")
-    print("|     4 - Deletar Categoria      |")
+    print("|     1 - Consultar Cliente    |")
+    print("|     2 - Inserir Cliente      |")
+    print("|     3 - Alterar Cliente      |")
+    print("|     4 - Deletar Cliente      |")
     print("|     5 - Sair do Sistema        |")
     print("|--------------------------------|")
 
@@ -67,6 +60,6 @@ def menu_categoria(opcao):
         elif opcao == "4":
            deletar(conexao)
         elif opcao == "5":
-           break
+            break
         else:
             print("Opção invalida, tente novamente")

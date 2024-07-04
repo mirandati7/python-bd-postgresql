@@ -15,9 +15,10 @@ def consultar(conexao):
 def inserir(conexao):
     cursor = conexao.cursor()
     print('Cadastro de usuario ')
-    login = input('Login : ') 
-    senha = input('Senha : ') 
-    sql_insert = "insert into usuario (login,senha) values ('"+ login +  "','"+ senha +  "')"
+    login = input('Login : ')
+    senha = input('Senha : ')
+    admin = input("Admin : (S - Sim) ou (N - Não)")
+    sql_insert = "insert into usuario (login,senha, admin) values ('"+ login +  "','"+ senha +  "','"+ admin +"')"
     print(sql_insert)
     cursor.execute(sql_insert)
     conexao.commit()
@@ -25,8 +26,8 @@ def inserir(conexao):
 def alterar(conexao):
     cursor = conexao.cursor()
     print('Alterar  usuario ')
-    login = input('Login : ') 
-    senha = input('Senha : ') 
+    login = input('Login : ')
+    senha = input('Senha : ')
     sql_update = "update usuario set senha ='" + senha + "' where login = '" + login + "'"
     cursor.execute(sql_update)
     conexao.commit()
